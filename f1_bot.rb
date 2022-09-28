@@ -1,11 +1,14 @@
 require 'discordrb'
+require './credantials'
 #Fjern token inden commit
-token = 'lokalt'
+token = $credantials[:token]
 userID = 166555724053217281
-bot = Discordrb::Bot.new token: token
+bot = Discordrb::Bot.new token: token , client_id: $credantials[:client_id]
 
-bot.message(content: '!ping') do |event|
-  event.respond('Pong')
+bot.message(with_text: 'ping') do |event|
+  puts 'test'
+  event.respond 'Pong'
 end
-
-bot.run
+p bot
+bot.run true
+bot.join
